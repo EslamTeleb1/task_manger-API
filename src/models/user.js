@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const jwt= require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const Task = require('./task');
+import mongoose from 'mongoose';
+import validator from 'validator';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import Task from './task';
 
-const userSchema= new mongoose.Schema({
+const userSchema: mongoose.Schema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -66,10 +66,9 @@ userSchema.virtual('tasks',{
 
 })
 
-userSchema.methods.toJSON = function(){
+userSchema.methods.toJSON = function(): any {
  
     const user=this;
-    //console.log(typeof(user));
     const userObject= user.toObject();
 
     delete userObject.password;
@@ -81,7 +80,7 @@ userSchema.methods.toJSON = function(){
 }
 
 // hash the plain text before saving it
-userSchema.methods.generateAuhtToken = async function(){
+userSchema.methods.generateAuhtToken = async function(): Promise<string> {
 
 const user=this;
 
@@ -95,7 +94,7 @@ user.tokens = user.tokens.concat({token});
 
 }
 
-userSchema.statics.findByCredentails= async(email,password)=>{
+userSchema.statics.findByCredentails= async(email: string, password: string): Promise<User> {
 
     const user= await User.findOne({email});
 
@@ -140,4 +139,4 @@ userSchema.pre('remove',async function(next){
 
 const User = mongoose.model('users',userSchema)
 
-module.exports = User
+export default User;
