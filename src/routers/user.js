@@ -1,25 +1,25 @@
-const express=require('express');
-const User= require('../models/user');
-const router=new express.Router();
-const auth=require('../middleware/auth')
-const multer=require('multer');
-const sharp=require('sharp');
-const {sendWelcomeEmail,sendGoodByeEmail}=require('../emails/account');
+import express, { Request, Response, NextFunction } from 'express';
+import User from '../models/user';
+const router=express.Router();
+import auth from '../middleware/auth';
+import multer from 'multer';
+import sharp from 'sharp';
+import { sendWelcomeEmail, sendGoodByeEmail } from '../emails/account';
 
 
 
-router.get('/test',(req,res)=>{
+router.get('/test',(req: Request, res: Response)=>{
 
     res.send('from sepreted file !');
 })
 
-router.get('/users/me',auth,async(req,res)=>{
+router.get('/users/me',auth,async(req: Request, res: Response)=>{
 
    res.send(req.user);
 })
 
 
-router.post('/users',async(req,res)=>{
+router.post('/users',async(req: Request, res: Response)=>{
 
   
     const user= new User(req.body);
@@ -35,7 +35,7 @@ router.post('/users',async(req,res)=>{
     }
 })
 
-router.post('/users/login',async(req,res)=>{
+router.post('/users/login',async(req: Request, res: Response)=>{
 
       try{
         const user= await User.findByCredentails(req.body.email,req.body.password);
@@ -51,7 +51,7 @@ router.post('/users/login',async(req,res)=>{
     }
 })
 
-router.post('/users/logout',auth,async(req,res)=>{
+router.post('/users/logout',auth,async(req: Request, res: Response)=>{
 
    // console.log('req.token : ',req.user.token);
     try{
@@ -69,7 +69,7 @@ router.post('/users/logout',auth,async(req,res)=>{
     }
 })
 
-router.post('/users/logoutall',auth,async(req,res)=>{
+router.post('/users/logoutall',auth,async(req: Request, res: Response)=>{
 
       try{
 
@@ -85,7 +85,7 @@ router.post('/users/logoutall',auth,async(req,res)=>{
         
 })
 
-router.patch('/users/me',auth,async(req,res)=>{
+router.patch('/users/me',auth,async(req: Request, res: Response)=>{
 
     const updates= Object.keys(req.body);
 
@@ -121,7 +121,7 @@ router.patch('/users/me',auth,async(req,res)=>{
 })
 
 
-router.delete('/users/me',auth,async(req,res)=>{
+router.delete('/users/me',auth,async(req: Request, res: Response)=>{
 
     const id=req.params.id;
 
@@ -155,7 +155,7 @@ const upload = multer({
     }
 })
 
-router.post('/users/me/avatar',auth,upload.single('avatar'),async(req,res)=>{
+router.post('/users/me/avatar',auth,upload.single('avatar'),async(req: Request, res: Response)=>{
 
     const buffer=await sharp(req.file.buffer).resize({width:250,height:250}).png().toBuffer();
 
@@ -169,7 +169,7 @@ router.post('/users/me/avatar',auth,upload.single('avatar'),async(req,res)=>{
     res.status(400).send({error:error.message});
 })
 
-router.delete('/users/me/avatar',auth,async(req,res)=>{
+router.delete('/users/me/avatar',auth,async(req: Request, res: Response)=>{
     
     if(req.user.avatar)
     {
@@ -181,7 +181,7 @@ router.delete('/users/me/avatar',auth,async(req,res)=>{
     res.status('400').send();
     
 })
-router.get('/users/:id/avatar',async(req,res)=>{
+router.get('/users/:id/avatar',async(req: Request, res: Response)=>{
 
     try{
 
@@ -199,4 +199,4 @@ router.get('/users/:id/avatar',async(req,res)=>{
     }
 })
 
-module.exports=router;
+export default router;
