@@ -4,12 +4,6 @@ const app=express();
 const port=process.env.PORT;
 const userRouter=require('../src/routers/user')
 const taskRouter=require('../src/routers/task')
-// app.use((req,res,next)=>{
-
-//     res.status(503).send('the web site under Maintance mode , please try again try :)')
-    
-// })
-
 
 app.use(express.json());
 
