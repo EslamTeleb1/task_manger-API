@@ -1,10 +1,10 @@
-const express=require('express');
-const Task=require('../models/task')
-const auth=require('../middleware/auth')
-const router= new express.Router();
+import express, { Request, Response, NextFunction } from 'express';
+import Task from '../models/task';
+import auth from '../middleware/auth';
+const router= express.Router();
 
 
-router.get('/tasks/:id',auth,async(req,res)=>{
+router.get('/tasks/:id',auth,async(req: Request, res: Response)=>{
 
     const _id=req.params.id;
     try{
@@ -26,7 +26,7 @@ router.get('/tasks/:id',auth,async(req,res)=>{
     
     
 })
-router.get('/tasks',auth,async(req,res)=>{
+router.get('/tasks',auth,async(req: Request, res: Response)=>{
     //res.send(req.user.tasks)
     const match={}
    ,sort={};
@@ -66,7 +66,7 @@ router.get('/tasks',auth,async(req,res)=>{
 })
 
 
-router.post('/tasks',auth,async(req,res)=>{
+router.post('/tasks',auth,async(req: Request, res: Response)=>{
 
      //const task= new Task(req.body);
 
@@ -89,7 +89,7 @@ router.post('/tasks',auth,async(req,res)=>{
 })
 
 
-router.patch('/tasks/:id',auth,async(req,res)=>{
+router.patch('/tasks/:id',auth,async(req: Request, res: Response)=>{
 
     const updates = Object.keys(req.body);
 
@@ -124,7 +124,7 @@ router.patch('/tasks/:id',auth,async(req,res)=>{
 })
 
 
-router.delete('/tasks/:id',auth,async(req,res)=>{
+router.delete('/tasks/:id',auth,async(req: Request, res: Response)=>{
 
     const id=req.params.id;
 
@@ -144,4 +144,4 @@ router.delete('/tasks/:id',auth,async(req,res)=>{
 
 })
 
-module.exports=router;
+export default router;
