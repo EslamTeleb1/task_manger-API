@@ -7,3 +7,8 @@ tools: vs code, postman.
  # you need to create config file before running 
 you can run it using npm install 
 then hit npm start 
+
+## Environment Variables
+This application uses environment variables for configuration. These are stored in a .env file. To set up your own .env file, follow these steps:
+1. Copy the .env.example file and rename it to .env.
+2. Replace the placeholder values in the .env file with your actual values.
