@@ -1,6 +1,8 @@
-const jwt=require('jsonwebtoken')
-const User=require('../models/user');
+import jwt from 'jsonwebtoken';
+import User from '../models/user';
+import { Request, Response, NextFunction } from 'express';
 
+const auth= async(req: Request, res: Response, next: NextFunction)=>{
 const auth= async(req,res,next)=>{
 
     try{
@@ -22,4 +24,4 @@ const auth= async(req,res,next)=>{
     next()
 }
 
-module.exports=auth
+export default auth;
