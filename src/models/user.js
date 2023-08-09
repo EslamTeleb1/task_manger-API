@@ -33,6 +33,7 @@ const userSchema= new mongoose.Schema({
             }
         }
     },
+    
     age: {
         type: Number,
         default: 0,

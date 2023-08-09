@@ -1,0 +1,13 @@
+# .env.example
+
+# The port number for the application to run on
+PORT=3000
+
+# Your SendGrid API key for sending emails
+SENDGRID_API_KEY=
+
+# Your secret key for signing JSON Web Tokens
+JWT_SECRET=
+
+# Your MongoDB connection string
+MONGODB_URL=mongodb://localhost:27017
