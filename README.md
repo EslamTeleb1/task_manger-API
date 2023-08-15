@@ -1,7 +1,7 @@
 # task_manger-API
  Manage users, store user tasks, with mongo db,
 users,tasks  JWT authentication and sending emails.
-Back-end: node.js, express.js, mongo db, jest unit testing.
+Back-end: node.js, express.js, mongo db,mongoose.js jest unit testing.
 tools: vs code, postman.
 
 ##how to install 
